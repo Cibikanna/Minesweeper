@@ -1,9 +1,9 @@
 package Minesweeper_console_application;
 
 import java.util.Scanner;
-import Minesweeper_console_application.Printing;
+import Minesweeper_console_application.*;
 
-public class Minesweeper extends Placeing_mines {
+public class Minesweeper extends Placing_mines {
 
     public static int n;
 
@@ -42,57 +42,21 @@ public class Minesweeper extends Placeing_mines {
 
         // Plese uncomment the following lines for answer board
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                Boolean_board[i][j] = true;
-            }
-        }
-        display.Print_board(board, Boolean_board);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                Boolean_board[i][j] = false;
-            }
-        }
+        /*
+         * for (int i = 0; i < n; i++) {
+         * for (int j = 0; j < n; j++) {
+         * Boolean_board[i][j] = true;
+         * }
+         * }
+         * display.Print_board(board, Boolean_board);
+         * for (int i = 0; i < n; i++) {
+         * for (int j = 0; j < n; j++) {
+         * Boolean_board[i][j] = false;
+         * }
+         * }
+         */
+        Play_Game p = new Play_Game();
+        p.Play(board, Boolean_board);
 
-        int t = 0;
-        while (true) {
-            if (t == 0) {
-                System.out.println("\nEnter the row and coloumn to open(For eg 2 and 3): ");
-                t = 1;
-            } else
-                System.out.println("\nEnter the row and coloumn to open: ");
-            int row = 0, col = 0;
-            try {
-                row = sc.nextInt();
-                col = sc.nextInt();
-                if (Boolean_board[row][col]) {
-                    System.out.println("The cell is already visited");
-                    continue;
-                }
-            } catch (Exception e) {
-                System.out.println("Enter the  valid row or coloumn");
-                continue;
-            }
-
-            if (board[row][col] == '*') {
-                Boolean_board[row][col] = true;
-                display.Print_board(board, Boolean_board);
-                System.out.print("You detonated a Mine! GAME OVER!");
-                break;
-            } else {
-                if (board[row][col] != '-') {
-                    Boolean_board[row][col] = true;
-                    display.Print_board(board, Boolean_board);
-                } else {
-                    visit_spaces.visitAdjacentCells(board, row, col, Boolean_board);
-                    display.Print_board(board, Boolean_board);
-                }
-                int f = win_or_not.verifying_Board(Boolean_board);
-                if (f == 1) {
-                    System.out.print("Congrats you wins!");
-                    break;
-                }
-            }
-        }
     }
 }

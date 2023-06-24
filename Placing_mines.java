@@ -1,6 +1,6 @@
 package Minesweeper_console_application;
 
-class Placeing_mines {
+class Placing_mines {
     public static char[][] place(char[][] a) {
         int m = a.length;
         a = randommines(a, m);
